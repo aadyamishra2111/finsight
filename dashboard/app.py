@@ -5,8 +5,14 @@ import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime
 import io
+import startup
 
 API_URL = "http://127.0.0.1:8000"
+
+def load_data():
+    import pandas as pd
+    df = pd.read_csv("data/transactions_with_predictions.csv")
+    return df, {"total": len(df), "anomalies_detected": int(df['predicted_anomaly'].sum())}
 
 st.set_page_config(page_title="FinSight", page_icon="🔍", layout="wide")
 
