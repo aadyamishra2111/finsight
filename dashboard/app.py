@@ -5,7 +5,16 @@ import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime
 import io
-import startup
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+if not os.path.exists("data/transactions_with_predictions.csv"):
+    from ml.generate_data import generate_transactions
+    from ml.train_model import train_model
+    df = generate_transactions()
+    df.to_csv("data/transactions.csv", index=False)
+    train_model()
 
 API_URL = "http://127.0.0.1:8000"
 
