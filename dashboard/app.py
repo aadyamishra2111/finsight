@@ -7,6 +7,8 @@ import io
 import sys
 import os
 import requests
+
+API_URL = "http://127.0.0.1:8000"
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 if not os.path.exists("data/transactions_with_predictions.csv"):
