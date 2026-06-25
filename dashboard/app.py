@@ -6,6 +6,7 @@ from datetime import datetime
 import io
 import sys
 import os
+import requests
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 if not os.path.exists("data/transactions_with_predictions.csv"):
