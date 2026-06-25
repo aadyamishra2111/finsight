@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import requests
 import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime
@@ -16,12 +15,16 @@ if not os.path.exists("data/transactions_with_predictions.csv"):
     df.to_csv("data/transactions.csv", index=False)
     train_model()
 
-API_URL = "http://127.0.0.1:8000"
+
 
 def load_data():
-    import pandas as pd
-    df = pd.read_csv("data/transactions_with_predictions.csv")
-    return df, {"total": len(df), "anomalies_detected": int(df['predicted_anomaly'].sum())}
+    base_path = os.path.join(os.path.dirname(__file__), '..', 'data')
+    df = pd.read_csv(os.path.join(base_path, "transactions_with_predictions.csv"))
+    data = {
+        "total": len(df),
+        "anomalies_detected": int(df['predicted_anomaly'].sum())
+    }
+    return df, data
 
 st.set_page_config(page_title="FinSight", page_icon="🔍", layout="wide")
 
